@@ -11,9 +11,9 @@ import java.io.*;
 
 public class DataLoader {
 
-    public List<ArtistNode> loadFile(String csvFilePath) throws FileNotFoundException {
+    public ArrayList<ArtistNode> loadFile(String csvFilePath) throws FileNotFoundException {
         // TODO Auto-generated method stub
-    	List<ArtistNode> list = new ArrayList<ArtistNode>();
+    	ArrayList<ArtistNode> list = new ArrayList<ArtistNode>();
     	
     	try {
     	BufferedReader file = new BufferedReader(new FileReader(new File(csvFilePath)));
@@ -78,10 +78,10 @@ public class DataLoader {
     }
 
 
-    public List<ArtistNode> loadAllFilesInDirectory(String directoryPath) throws FileNotFoundException {
+    public ArrayList<ArtistNode> loadAllFilesInDirectory(String directoryPath) throws FileNotFoundException {
         // TODO Auto-generated method stub
-    	List<ArtistNode> dirList = new ArrayList<ArtistNode>();
-    	List<ArtistNode> tempList = new ArrayList<ArtistNode>();
+    	ArrayList<ArtistNode> dirList = new ArrayList<ArtistNode>();
+    	ArrayList<ArtistNode> tempList = new ArrayList<ArtistNode>();
     	try {
         File directory = new File(directoryPath);
     	String[] contents = directory.list();

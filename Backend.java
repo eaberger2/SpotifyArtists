@@ -9,9 +9,18 @@ public class Backend {
         this.list = li;
     }
 
-    public void sort(){
+    public ArrayList<ArtistNode> sort(){
+        sortedList = new ArrayList<ArtistNode>();
         int[] counts = listOfValues(list);
-        
+        for(int i=counts.length-1; i>=0; i--){
+            for(int j = 0; j<counts[i]; j++){
+                System.out.println(counts[i]);
+                sortedList.add(find(i));
+                remove(find(i));
+                i--;
+            }
+        }
+        return sortedList;
     }
 
     public int[] listOfValues(ArrayList<ArtistNode> li){
@@ -55,4 +64,27 @@ public class Backend {
         return currMin;
     }
 
+    public ArtistNode find(int count){
+        ArtistNode found = null; 
+        for(int i=0; i<list.size(); i++){
+            if(list.get(i).getCount()==count){
+                found = list.get(i);
+                return found;
+            }
+        }
+        return found;
+    }
+
+    public boolean remove(ArtistNode rmNode){
+        return list.remove(rmNode);
+    }
+    
+    public boolean contains(int count){
+        for(int i=0; i<list.size(); i++){
+            if(list.get(i).getCount()==count){
+                return true;
+            }
+        }
+        return false;
+    }
 }
