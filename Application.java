@@ -17,7 +17,6 @@ public class Application {
 		}
 		Backend newLi = new Backend(li);
 		ArrayList<ArtistNode> sorted = newLi.sort();
-		System.out.println(sorted.size() + "Hello Emily");
 		Iterator<ArtistNode> it = sorted.iterator();
 		while(it.hasNext()) {
 			System.out.println(it.next());
