@@ -16,17 +16,18 @@ public class DataLoader {
     	ArrayList<ArtistNode> list = new ArrayList<ArtistNode>();
     	
     	try {
+		//reads file
     	BufferedReader file = new BufferedReader(new FileReader(new File(csvFilePath)));
-    	//Scanner file = new Scanner(new File(csvFilePath));
     	String firstLine = file.readLine();
+		//split first line by columns
     	String[] categories = firstLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
     	int titleCol = 0;
     	int artistCol = 0;
-    	
+    	//throws exception if the file does not contain needed song info
     	if(!firstLine.contains("Track Name") || !firstLine.contains("Artist Name(s)")) {	
     			throw new FileNotFoundException();
     	}
-    	
+    	//asigns song name and artist name column
     	for(int i = 0; i < categories.length; i++) {
     		if(categories[i].contains("Track Name")) {
     			titleCol = i;
@@ -39,27 +40,46 @@ public class DataLoader {
     	
     	String title = "";
     	String artist = "";
+		//arraylist to keep track of which artists are already in the list
         ArrayList<String> addedArtists = new ArrayList<String>();
+		//loops while the file has a next line
     	while(file.ready()) {
+			//reads next line of the file
     		String line = file.readLine();
+			//splits the file by designated columns
     		String[] lineSplit = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+				//removes quotations from the title column
     			lineSplit[titleCol] = lineSplit[titleCol].replaceAll("\"","");
     			title = lineSplit[titleCol];
+				System.out.println("Before split: "+title);
+				//remove parentheses after title
+				String getRidOfPar[] = title.split("(");
+				title = getRidOfPar[0];
     			title.trim();
+				System.out.println("After split: "+title);
+				//removes quotations from the artist column
     			lineSplit[artistCol] = lineSplit[artistCol].replaceAll("\"","");
     			artist = lineSplit[artistCol];
+				//splits the artist column by commas
     			String[] artists = artist.split(",");
+				//goes through each artist featured on the song
     			for(int i=0; i<artists.length; i++) {
-    				artists[i].trim();
+					//trims artist strings
+    				//String newArtistName = artists[i].trim();
+					artists[i].trim();
                     if(addedArtists.contains(artists[i])){
                         int index = addedArtists.indexOf(artists[i]);
                         list.get(index).incCount();
                         list.get(index).addSong(title);
                     }
                     else{
+					//creates a new artist node with new artist and song
                     ArtistNode newNode = new ArtistNode(artists[i],title);
+					//increment the artist's count
                     newNode.incCount();
+					//add the artist to the overall list
     				list.add(newNode);
+					//add the name of the artist to the list that keeps track of them
                     addedArtists.add(artists[i]);
                     }
     			}
