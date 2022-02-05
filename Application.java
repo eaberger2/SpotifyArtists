@@ -11,12 +11,13 @@ public class Application {
 		DataLoader data = new DataLoader();
 		ArrayList<ArtistNode> li = new ArrayList<ArtistNode>();
 		try {
-			li = data.loadAllFilesInDirectory("C:\\Users\\emily\\eclipse-workspace\\SpotifyWrapped\\src\\songlib");
+			li = data.loadAllFilesInDirectory("C:\\Users\\emily\\OneDrive\\Documents\\GitHub\\SpotifyArtists\\SpotifyArtists\\songlib");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		Backend newLi = new Backend(li);
 		ArrayList<ArtistNode> sorted = newLi.sort();
+		System.out.println("List size: "+sorted.size());
 		Iterator<ArtistNode> it = sorted.iterator();
 		while(it.hasNext()) {
 			System.out.println(it.next());
