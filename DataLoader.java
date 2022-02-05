@@ -50,13 +50,8 @@ public class DataLoader {
     		String[] lineSplit = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 				//removes quotations from the title column
     			lineSplit[titleCol] = lineSplit[titleCol].replaceAll("\"","");
-    			title = lineSplit[titleCol];
-				System.out.println("Before split: "+title);
-				//remove parentheses after title
-				String getRidOfPar[] = title.split("(");
-				title = getRidOfPar[0];
+    			title = lineSplit[titleCol];	
     			title.trim();
-				System.out.println("After split: "+title);
 				//removes quotations from the artist column
     			lineSplit[artistCol] = lineSplit[artistCol].replaceAll("\"","");
     			artist = lineSplit[artistCol];

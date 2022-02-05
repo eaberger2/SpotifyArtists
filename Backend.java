@@ -14,7 +14,6 @@ public class Backend {
         int[] counts = listOfValues(list);
         for(int i=counts.length-1; i>=0; i--){
             for(int j = 0; j<counts[i]; j++){
-                System.out.println(counts[i]);
                 sortedList.add(find(i));
                 remove(find(i));
                 i--;
